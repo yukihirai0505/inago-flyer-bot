@@ -28,16 +28,12 @@ def inago():
         'apiKey': BIT_MEX_API_KEY,
         'secret': BIT_MEX_API_SECRET
     })
-    if volume > 701 and taker_side == 'sell':
-        bitmex.create_limit_sell_order('BTC/USD', {
-            'amount': 10,
-            'price': last_price
-        })
+    if volume > 901 and taker_side == 'sell':
+        bitmex.create_limit_sell_order('BTC/USD', 10, last_price + 1)
         return {
             'data': 'sell!!'
         }
 
-    print(data)
     return {
         'data': 'ok'
     }
