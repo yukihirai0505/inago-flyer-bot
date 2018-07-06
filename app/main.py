@@ -1,12 +1,11 @@
-import boto3
 import json
+
 import ccxt
-from app.config import BIT_MEX_API_KEY, BIT_MEX_API_SECRET
 from bottle import post, hook, request, response, default_app, run
 
+from app.config import BIT_MEX_API_KEY, BIT_MEX_API_SECRET
+
 utf8 = 'utf-8'
-s3 = boto3.resource('s3')
-s3client = boto3.client('s3')
 
 
 @hook('after_request')
