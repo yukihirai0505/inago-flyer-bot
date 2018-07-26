@@ -1,4 +1,6 @@
 import os
 
+BITBANK_API_KEY = os.getenv('BITBANK_API_KEY')
+BITBANK_API_SECRET = os.getenv('BITBANK_API_SECRET')
 BIT_MEX_API_KEY = os.getenv('BIT_MEX_API_KEY')
 BIT_MEX_API_SECRET = os.getenv('BIT_MEX_API_SECRET')

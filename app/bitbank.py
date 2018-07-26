@@ -1,9 +1,10 @@
 import json
 
 import ccxt
+import requests
 from bottle import post, hook, request, response, default_app, run
 
-from app.config import BIT_MEX_API_KEY, BIT_MEX_API_SECRET
+from app.config import BITBANK_API_KEY, BITBANK_API_SECRET
 
 utf8 = 'utf-8'
 
@@ -23,14 +24,15 @@ def inago():
     pair_currency = data['pairCurrency']
     from_unix_time = data['fromUnixTime']
     to_unix_time = data['toUnixTime']
-    bitmex = ccxt.bitmex({
-        'apiKey': BIT_MEX_API_KEY,
-        'secret': BIT_MEX_API_SECRET
+    bitbank = ccxt.bitbank({
+        'apiKey': BITBANK_API_KEY,
+        'secret': BITBANK_API_SECRET
     })
-    if volume > 901 and taker_side == 'sell':
-        bitmex.create_limit_sell_order('BTC/USD', 10, last_price + 1)
+    bitbank_last_price = int(requests.get('https://public.bitbank.cc/btc_jpy/ticker').json()['data']['last'])
+    if volume > 1000 and taker_side == 'buy':
+        bitbank.create_limit_buy_order('BTC/JPY', 0.001, bitbank_last_price - 500)
         return {
-            'data': 'sell!!'
+            'data': 'buy!!'
         }
 
     return {
